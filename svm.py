@@ -1,3 +1,6 @@
+!pip install cvxopt
+from cvxopt import matrix as cvxopt_matrix
+from cvxopt import solvers
 def SvmOptim(X, y):
   m,n = X.shape
   y = y.reshape(-1,1) * 1.
