@@ -1,4 +1,3 @@
-!pip install cvxopt
 from cvxopt import matrix as cvxopt_matrix
 from cvxopt import solvers
 def SvmOptim(X, y):
