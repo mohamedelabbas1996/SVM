@@ -87,9 +87,9 @@ class WordRepresentation:
       return tf_idf_vector.toarray()  
   def tf_idf(self,text):
     return TFIDF().tf_idf(text)     
-  def get_representation(self):
+  def get_representation(self,text):
     if self.method == "tf-idf":
-      return tf_idf(text)
+      return self.tf_idf(text)
       
     elif self.method=="frequency-count":
       pass
