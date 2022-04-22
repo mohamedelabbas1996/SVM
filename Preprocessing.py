@@ -1,4 +1,5 @@
 from nltk.stem import PorterStemmer
+import re
 class DataPreprocessing:
   
   def _remove_html(self, data):
