@@ -1,8 +1,41 @@
 
-from sklearn.feature_extraction.text import TfidfTransformer
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.feature_extraction.text import CountVectorizer
+
 import numpy as np
+
+class WordFrequency:
+  def _get_word_set(self,text): 
+    sentences = []
+    word_set = []
+    for sent in text:
+        x = [i.lower() for  i in sent.split() if i.isalpha()]
+        sentences.append(x)
+        for word in x:
+            if word not in word_set:
+                word_set.append(word)
+    return set(word_set),sentences
+  def _count_word(self,word,sentence):
+    count = 0
+    for w in sentence:
+      if w==word:
+        count +=1
+    return count    
+
+  def word_frequency(self,text):
+    word_set , sentences = self._get_word_set(text) 
+    print (sorted(word_set))
+    word_count = []
+    for sentence in sentences:
+      row =[]
+      for word in sorted(word_set):
+        row.append(self._count_word(word,sentence))
+      word_count.append(row)
+    return np.array(word_count)
+
+  
+
+        
+
+
 class TFIDF:
 
   def _get_word_set(self,text): 
@@ -77,14 +110,9 @@ class WordRepresentation:
   def __init__(self, method = 'tf-idf'):
     self.method = method
   def count_frequency(self,text):
-      pass
-  def tf_idf_m(self,text):
-      coun = CountVectorizer()
-      word_count=coun.fit_transform(text)
-      tf_idf_transformer = TfidfTransformer()
-      tf_idf_transformer.fit(word_count)
-      tf_idf_vector = tf_idf_transformer.transform(word_count)
-      return tf_idf_vector.toarray()  
+      wf = WordFrequency()
+      return wf.word_frequency(text)
+
   def tf_idf(self,text):
     return TFIDF().tf_idf(text)     
   def get_representation(self,text):
@@ -92,7 +120,7 @@ class WordRepresentation:
       return self.tf_idf(text)
       
     elif self.method=="frequency-count":
-      pass
+      return self.count_frequency(text)
     else:
       raise Exception("Unknown method")
     pass
