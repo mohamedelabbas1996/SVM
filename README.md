@@ -1,3 +1,3 @@
 # SVM
-Support Vector Machine (SVM) Implementation
+An Implementation for Support Vector Machine (SVM) 
 
